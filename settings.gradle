@@ -1,0 +1,2 @@
+rootProject.name='HypertensionMonitor'
+include ':app'
