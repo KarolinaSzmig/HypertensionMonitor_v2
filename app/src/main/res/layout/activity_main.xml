@@ -7,6 +7,12 @@
     android:background="@drawable/tlo_ekran_gowny_v2"
     tools:context=".MainActivity">
 
+
+
+
+
+
+
     <TextView
         android:id="@+id/heading"
         android:layout_width="332dp"

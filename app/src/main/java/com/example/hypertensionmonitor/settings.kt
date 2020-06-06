@@ -53,6 +53,7 @@ class settings : AppCompatActivity() {
 
             val timeIntent = Intent(this, MainActivity::class.java)
             timeIntent.putExtra("MNhour", MNhour)
+            timeIntent.putExtra("MNminute", MNminute)
             startActivity(timeIntent)
 
 
