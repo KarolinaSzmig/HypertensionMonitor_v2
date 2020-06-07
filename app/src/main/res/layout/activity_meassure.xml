@@ -88,18 +88,18 @@
         app:layout_constraintVertical_bias="0.101"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/medCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="false"
         android:text="Today's medicines"
-        android:textSize="30sp"
+        android:textColor="#000000"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.196" />
+        app:layout_constraintVertical_bias="0.197" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

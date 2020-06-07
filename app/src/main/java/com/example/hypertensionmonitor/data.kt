@@ -24,8 +24,6 @@ class data : AppCompatActivity() {
 
 
 
-
-
         weekChartShow.setOnClickListener {
             val intent = Intent(this, WeekChart::class.java)
             startActivity(intent)
@@ -37,16 +35,14 @@ class data : AppCompatActivity() {
         delete.setOnClickListener {
 
 
-
-
             try {
 
-                //dopisywanie do pliku
+                //usuwanie danych z pliku
 
-                val fOut = FileOutputStream(File(filesDir, "results.csv"), false) // TODO
+                val fOut = FileOutputStream(File(filesDir, "results.csv"), false)
                 val out = OutputStreamWriter(fOut)
 
-                out.write("")
+                out.write("DATE;SYS_PRESSURE;DIA_PRESSURE;IF_MED_TAKEN")
 
                 out.flush()
                 out.close()
