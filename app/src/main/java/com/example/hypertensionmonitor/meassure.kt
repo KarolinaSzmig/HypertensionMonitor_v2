@@ -69,7 +69,7 @@ class meassure : AppCompatActivity() {
 
             //Ciśnienie skurczowe 90-135 mm Hg
             //Ciśnienie rozkurczowe 50-90 mm Hg
-            if (SpressureV.toInt() < 70 || SpressureV.toInt() > 300) {
+            if (SpressureV.toInt() < 70 || SpressureV.toInt() > 260) {
                 Toast1.makeText(
                     applicationContext,
                     "The systolic pressure value is incorrect!",
@@ -92,7 +92,6 @@ class meassure : AppCompatActivity() {
                 val currently = LocalDateTime.now().toString()
                 //println(day)
                 //println(xddd)
-
 
                 //var fileWriter: FileWriter? = null
 

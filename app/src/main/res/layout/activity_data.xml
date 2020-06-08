@@ -7,48 +7,21 @@
     android:background="@drawable/to_ekrany_dalsze_v2"
     tools:context=".data">
 
+
     <TextView
         android:id="@+id/weekData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last week:"
+        android:text="Show graph:"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044" />
-
-
-
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_weight="1"-->
-<!--        android:orientation="vertical">-->
-
-<!--        <com.github.mikephil.charting.charts.BarChart-->
-<!--            android:id="@+id/barchart"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_marginTop="10dp"-->
-<!--            android:layout_weight="1">-->
-
-<!--        </com.github.mikephil.charting.charts.BarChart>-->
-
-
-
-
-
-<!--    </LinearLayout>-->
-
-
-
-
-
+        app:layout_constraintVertical_bias="0.046" />
 
     <Button
         android:id="@+id/getFile"
@@ -62,32 +35,319 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weekData"
-        app:layout_constraintVertical_bias="0.762" />
+        app:layout_constraintVertical_bias="0.874" />
 
     <Button
         android:id="@+id/delete"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete data"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/getFile"
-        app:layout_constraintVertical_bias="0.148" />
+        app:layout_constraintVertical_bias="0.17" />
 
     <Button
         android:id="@+id/weekChartShow"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="show"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.362"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weekData"
-        app:layout_constraintVertical_bias="0.066" />
+        app:layout_constraintVertical_bias="0.062" />
 
+    <RadioGroup
+        android:id="@+id/graphRange"
+        android:layout_width="117dp"
+        android:layout_height="99dp"
+        android:checkedButton="@id/radio_all"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toEndOf="@+id/weekChartShow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.137">
+
+        <RadioButton
+            android:id="@+id/radio_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="all data"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radio_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="last week"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radio_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioButtonClicked"
+            android:text="last month"
+            android:textSize="18sp" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Summary:"
+        android:textColor="#000000"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33" />
+
+    <TextView
+        android:id="@+id/textMean"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Mean:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/textMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Max:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintStart_toEndOf="@+id/textMean"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/minText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Min:"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintStart_toEndOf="@+id/textMax"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintVertical_bias="0.061" />
+
+    <TextView
+        android:id="@+id/meanGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMean"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <TextView
+        android:id="@+id/maxGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textMax"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <TextView
+        android:id="@+id/minGeneral"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/maxGeneral"
+        app:layout_constraintTop_toBottomOf="@+id/minText"
+        app:layout_constraintVertical_bias="0.085" />
+
+    <TextView
+        android:id="@+id/meanTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#009688"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meanGeneral"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <TextView
+        android:id="@+id/maxTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#009688"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintStart_toEndOf="@+id/meanTaken"
+        app:layout_constraintTop_toBottomOf="@+id/maxGeneral"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <TextView
+        android:id="@+id/minTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#009688"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/maxTaken"
+        app:layout_constraintTop_toBottomOf="@+id/minGeneral"
+        app:layout_constraintVertical_bias="0.069" />
+
+    <TextView
+        android:id="@+id/meanNotTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/meanTaken"
+        app:layout_constraintVertical_bias="0.088" />
+
+    <TextView
+        android:id="@+id/maxNotTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.302"
+        app:layout_constraintStart_toEndOf="@+id/meanNotTaken"
+        app:layout_constraintTop_toBottomOf="@+id/maxTaken"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <TextView
+        android:id="@+id/minNotTaken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="000"
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toEndOf="@+id/maxNotTaken"
+        app:layout_constraintTop_toBottomOf="@+id/minTaken"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <TextView
+        android:id="@+id/medTaken"
+        android:layout_width="110dp"
+        android:layout_height="39dp"
+        android:gravity="center"
+        android:text="Meds taken"
+        android:textColor="#009688"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medsNotTaken"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/medsNotTaken"
+        android:layout_width="130dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="Meds not taken"
+        android:textColor="#F44336"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.271" />
+
+
+    <!--    <paths xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--        tools:ignore="MissingConstraints">-->
+    <!--        <files-path-->
+    <!--            android:name="files"-->
+    <!--            android:path="/data/data/com.example.hypertensionmonitor/files/results.csv"/>-->
+    <!--    </paths>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

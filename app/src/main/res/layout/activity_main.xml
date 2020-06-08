@@ -62,8 +62,10 @@
 
     <Button
         android:id="@+id/goMeassure"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:shadowColor="#735D5D"
         android:text="Meassure blood preassure!"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -74,6 +76,7 @@
 
     <Button
         android:id="@+id/goShow"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Show data!"
@@ -86,6 +89,7 @@
 
     <Button
         android:id="@+id/goSettings"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Settings"
