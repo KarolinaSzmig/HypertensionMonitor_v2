@@ -32,10 +32,10 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/weekData"
-        app:layout_constraintVertical_bias="0.874" />
+        app:layout_constraintVertical_bias="0.813" />
 
     <Button
         android:id="@+id/delete"
@@ -113,10 +113,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.102"
+        app:layout_constraintHorizontal_bias="0.329"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintVertical_bias="0.292" />
 
     <TextView
         android:id="@+id/textMean"
@@ -125,14 +125,14 @@
         android:gravity="left"
         android:text="Mean:"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.145"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/summary"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <TextView
         android:id="@+id/textMax"
@@ -141,14 +141,14 @@
         android:gravity="left"
         android:text="Max:"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.263"
+        app:layout_constraintHorizontal_bias="0.257"
         app:layout_constraintStart_toEndOf="@+id/textMean"
         app:layout_constraintTop_toBottomOf="@+id/summary"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <TextView
         android:id="@+id/minText"
@@ -157,190 +157,100 @@
         android:gravity="left"
         android:text="Min:"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.53"
         app:layout_constraintStart_toEndOf="@+id/textMax"
         app:layout_constraintTop_toBottomOf="@+id/summary"
-        app:layout_constraintVertical_bias="0.061" />
+        app:layout_constraintVertical_bias="0.232" />
 
     <TextView
-        android:id="@+id/meanGeneral"
+        android:id="@+id/mean"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:text="000"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textMean"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <TextView
-        android:id="@+id/maxGeneral"
+        android:id="@+id/max"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:text="000"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textMax"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <TextView
-        android:id="@+id/minGeneral"
+        android:id="@+id/min"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
         android:text="000"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/maxGeneral"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toEndOf="@+id/max"
         app:layout_constraintTop_toBottomOf="@+id/minText"
-        app:layout_constraintVertical_bias="0.085" />
+        app:layout_constraintVertical_bias="0.16" />
 
-    <TextView
-        android:id="@+id/meanTaken"
+    <Button
+        android:id="@+id/general"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#009688"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:text="General"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meanGeneral"
-        app:layout_constraintVertical_bias="0.072" />
-
-    <TextView
-        android:id="@+id/maxTaken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#009688"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toEndOf="@+id/meanTaken"
-        app:layout_constraintTop_toBottomOf="@+id/maxGeneral"
-        app:layout_constraintVertical_bias="0.072" />
-
-    <TextView
-        android:id="@+id/minTaken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#009688"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/maxTaken"
-        app:layout_constraintTop_toBottomOf="@+id/minGeneral"
-        app:layout_constraintVertical_bias="0.069" />
-
-    <TextView
-        android:id="@+id/meanNotTaken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#F44336"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.073"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/meanTaken"
-        app:layout_constraintVertical_bias="0.088" />
-
-    <TextView
-        android:id="@+id/maxNotTaken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#F44336"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.302"
-        app:layout_constraintStart_toEndOf="@+id/meanNotTaken"
-        app:layout_constraintTop_toBottomOf="@+id/maxTaken"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <TextView
-        android:id="@+id/minNotTaken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:text="000"
-        android:textColor="#F44336"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
-        app:layout_constraintStart_toEndOf="@+id/maxNotTaken"
-        app:layout_constraintTop_toBottomOf="@+id/minTaken"
-        app:layout_constraintVertical_bias="0.091" />
-
-    <TextView
-        android:id="@+id/medTaken"
-        android:layout_width="110dp"
-        android:layout_height="39dp"
-        android:gravity="center"
-        android:text="Meds taken"
-        android:textColor="#009688"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.813"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/medsNotTaken"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/medsNotTaken"
-        android:layout_width="130dp"
-        android:layout_height="43dp"
-        android:gravity="center"
-        android:text="Meds not taken"
-        android:textColor="#F44336"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.825"
+        app:layout_constraintEnd_toStartOf="@+id/summary"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.271" />
+        app:layout_constraintVertical_bias="0.383" />
+
+    <Button
+        android:id="@+id/medsT"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meds taken"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintStart_toEndOf="@+id/general"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <Button
+        android:id="@+id/medsNT"
+        style="@android:style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meds not taken"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toEndOf="@+id/medsT"
+        app:layout_constraintTop_toBottomOf="@+id/summary"
+        app:layout_constraintVertical_bias="0.043" />
 
 
     <!--    <paths xmlns:android="http://schemas.android.com/apk/res/android"-->

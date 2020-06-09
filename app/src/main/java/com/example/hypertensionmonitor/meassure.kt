@@ -1,6 +1,5 @@
 package com.example.hypertensionmonitor
 
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
@@ -8,17 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_meassure.*
 import java.io.File
 import java.io.FileOutputStream
-import java.io.FileWriter
 import java.io.OutputStreamWriter
 import java.time.LocalDateTime
-import java.util.*
 import android.widget.Toast as Toast1
 
 
 class meassure : AppCompatActivity() {
-
-
-    private val CSV_HEADER = "date,systolic,diastolic,ifTaken"
 
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -26,28 +20,6 @@ class meassure : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meassure)
 
-
-        //zaznaczenie czy leki zostały wzięte
-
-//        medCheck.setOnCheckedChangeListener { view, ifTaken ->
-//            if (ifTaken==true){
-//            println(ifTaken.toString())}
-//            else{
-//            println(ifTaken.toString())}
-//        }
-        //println(ifTaken)
-
-
-        //println(medCheck)
-
-//        medCheck.setOnCheckedChangeListener({
-//            view, ifTaken ->
-//            if(ifTaken){
-//                true
-//            }else{
-//                false
-//            }
-//        })
 
         //sprawdzenie, czy użytkownik wziął leki
         var ifTaken = false
@@ -57,25 +29,24 @@ class meassure : AppCompatActivity() {
             } else {
                 ifTaken = false
             }
-            println(ifTaken)
         }
 
+        //pobór zmiennych wprowadzonych przez użytkownika
         save.setOnClickListener {
 
             var SpressureV: String = Spressure.getText().toString()
             var DpressureV: String = editText2.getText().toString()
 
-
-
+            //Zabezpieczenia przed wprowadzeniem nieprawidłowych danych
             //Ciśnienie skurczowe 90-135 mm Hg
             //Ciśnienie rozkurczowe 50-90 mm Hg
-            if (SpressureV.toInt() < 70 || SpressureV.toInt() > 260) {
+            if (SpressureV.toInt() < 70 || SpressureV.toInt() > 250) {
                 Toast1.makeText(
                     applicationContext,
                     "The systolic pressure value is incorrect!",
                     android.widget.Toast.LENGTH_SHORT
                 ).show()
-            } else if (DpressureV.toInt() < 35 || DpressureV.toInt() > 170) {
+            } else if (DpressureV.toInt() < 35 || DpressureV.toInt() > 150) {
                 Toast1.makeText(
                     applicationContext,
                     "The diastolic pressure value is incorrect!",
@@ -83,33 +54,22 @@ class meassure : AppCompatActivity() {
                 ).show()
             } else {
                 //data pomiaru
-
-//                val c = Calendar.getInstance()
-//                val cHour = c.get(Calendar.HOUR_OF_DAY).toString()
-//                val cMinute = c.get(Calendar.MINUTE).toString()
-                //println("AAAAAAAAAAAAAAAAAAAAAAAAAA")
-                //val day:String=c.get(Calendar.DAY_OF_YEAR).toString()
                 val currently = LocalDateTime.now().toString()
-                //println(day)
-                //println(xddd)
 
-                //var fileWriter: FileWriter? = null
-
+                //dopisywanie do pliku csv
                 try {
 
-                    //dopisywanie do pliku
-
-                    val fOut = FileOutputStream(File(filesDir, "results.csv"), true) // TODO
+                    val fOut = FileOutputStream(File(filesDir, "results.csv"), true)
                     val out = OutputStreamWriter(fOut)
 
                     out.write("\n")
-                    out.write(currently)
+                    out.write(currently)//data pomiaru
                     out.write(";")
-                    out.write(SpressureV)
+                    out.write(SpressureV)//ciśnienie skurczowe
                     out.write(";")
-                    out.write(DpressureV)
+                    out.write(DpressureV)//ciśnienie rozkorczowe
                     out.write(";")
-                    out.write(ifTaken.toString())
+                    out.write(ifTaken.toString())//czy leki zostały wzięte
 
 
                     out.flush()
@@ -123,13 +83,8 @@ class meassure : AppCompatActivity() {
                 }
 
 
-                //przejście do widoku 'data' oraz przekazanie zmiennych - niepotrzebne, do usunięcia
-                val intent = Intent(this, WeekChart::class.java)
-                intent.putExtra("Spressure", SpressureV)
-                startActivity(intent)
-
-
                 //alert - ciśnienie powyżej 180/120 mm Hg
+                //pomiar zapisuje się, ale dodatkowo wyświetli się komunikat
                 if (SpressureV.toInt() > 179 || DpressureV.toInt() > 119) {
                     Toast1.makeText(
                         applicationContext,

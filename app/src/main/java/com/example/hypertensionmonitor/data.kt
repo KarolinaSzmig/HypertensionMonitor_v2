@@ -1,20 +1,16 @@
 package com.example.hypertensionmonitor
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import kotlinx.android.synthetic.main.activity_data.*
 import java.io.*
 import kotlin.math.roundToInt
 
 
-//import kotlinx.android.synthetic.main.activity_data//.backButton
 
 class data : AppCompatActivity() {
 
@@ -22,6 +18,7 @@ class data : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_data)
 
+        //funkcja czytająca zawartość pliku csv
         fun dataReading(): List<String> {
             var sysRes = emptyArray<Int>()
             var meassurment = emptyList<String>()
@@ -44,7 +41,6 @@ class data : AppCompatActivity() {
 
 
         //dane do podsumowania
-
         val meassurment = dataReading()
 
         var splitRes: List<String>
@@ -71,36 +67,57 @@ class data : AppCompatActivity() {
                 diaMedNotTaken=diaMedNotTaken+splitRes[2].toDouble()
             }
         }
-
+        //domyślnie - dane ze wszystkich pomiarów
         var meanSysG = sysRes.average().roundToInt().toString()
         var meanDiaG=diaRes.average().roundToInt().toString()
-        meanGeneral.setText("$meanSysG / $meanDiaG")
+        mean.setText("$meanSysG / $meanDiaG")
         var maxSysG=sysRes.max()?.toInt().toString()
         var maxDiaG= diaRes.max()?.toInt().toString()
-        maxGeneral.setText("$maxSysG / $maxDiaG")
+        max.setText("$maxSysG / $maxDiaG")
         var minSysG=sysRes.min()?.toInt().toString()
         var minDiaG= diaRes.min()?.toInt().toString()
-        minGeneral.setText("$minSysG / $minDiaG")
+        min.setText("$minSysG / $minDiaG")
 
         var meanSysT=sysMedTaken.average().roundToInt().toString()
         var meanDiaT=diaMedTaken.average().roundToInt().toString()
-        meanTaken.setText("$meanSysT / $meanDiaT")
+
         var maxSysT=sysMedTaken.max()?.toInt().toString()
         var maxDiaT= diaMedTaken.max()?.toInt().toString()
-        maxTaken.setText("$maxSysT / $maxDiaT")
+
         var minSysT=sysMedTaken.min()?.toInt().toString()
         var minDiaT= diaMedTaken.min()?.toInt().toString()
-        minTaken.setText("$minSysT / $minDiaT")
+
 
         var meanSysNT=sysMedNotTaken.average().roundToInt().toString()
         var meanDiaNT=diaMedNotTaken.average().roundToInt().toString()
-        meanNotTaken.setText("$meanSysNT / $meanDiaNT")
+
         var maxSysNT=sysMedNotTaken.max()?.toInt().toString()
         var maxDiaNT= diaMedNotTaken.max()?.toInt().toString()
-        maxNotTaken.setText("$maxSysNT / $maxDiaNT")
+
         var minSysNT=sysMedNotTaken.min()?.toInt().toString()
         var minDiaNT= diaMedNotTaken.min()?.toInt().toString()
-        minNotTaken.setText("$minSysNT / $minDiaNT")
+
+
+
+        general.setOnClickListener {
+            mean.setText("$meanSysG / $meanDiaG")
+            max.setText("$maxSysG / $maxDiaG")
+            min.setText("$minSysG / $minDiaG")
+        }
+
+        medsT.setOnClickListener {
+            mean.setText("$meanSysT / $meanDiaT")
+
+            max.setText("$maxSysT / $maxDiaT")
+            min.setText("$minSysG / $minDiaG")
+        }
+
+        medsNT.setOnClickListener {
+            mean.setText("$meanSysNT / $meanDiaNT")
+            max.setText("$maxSysNT / $maxDiaNT")
+            min.setText("$minSysNT / $minDiaNT")
+        }
+
 
 
 
