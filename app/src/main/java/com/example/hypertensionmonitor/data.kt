@@ -39,6 +39,7 @@ class data : AppCompatActivity() {
         }
 
 
+
         //zczytanie pliku
         val meassurment = dataReading()
 
