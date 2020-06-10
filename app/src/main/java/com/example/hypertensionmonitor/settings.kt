@@ -38,18 +38,20 @@ class settings : AppCompatActivity() {
 
 
         //przełącznik - gdy 'ON', pojawia się TmiePicker i przycisk 'set'
+        var switchCheck = false
         val switchMorning: Switch = findViewById(R.id.switchMorning)
         switchMorning.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 switchMorning.setText("ON")
                 MNTpicker.visibility = View.VISIBLE
                 setMN.visibility = View.VISIBLE
-
+                switchCheck = true
 
             } else {
                 switchMorning.setText("OFF")
                 MNTpicker.visibility = View.INVISIBLE
                 setMN.visibility = View.INVISIBLE
+                switchCheck = false
             }
         }
 
@@ -58,6 +60,7 @@ class settings : AppCompatActivity() {
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         //set - ustawianie przypomnień pomiru ciśnienia
+
         setMN.setOnClickListener {
 
             //określenie godziny powiadomień
@@ -88,6 +91,7 @@ class settings : AppCompatActivity() {
                 notifyIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
+
 
             //Ustawienie godziny oraz interwału przypomnień
             val alarmManager =
@@ -192,7 +196,7 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
 
             builder = Notification.Builder(this)
                 .setContentTitle("Meassure reminder")
-                .setContentText("It's time for meassuring your blood pressure!")
+                .setContentText("It's time to messure your blood pressure!")
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setLargeIcon(
                     BitmapFactory.decodeResource(

@@ -1,7 +1,9 @@
 package com.example.hypertensionmonitor
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_meassure.*
@@ -31,8 +33,10 @@ class meassure : AppCompatActivity() {
             }
         }
 
+
         //pobór zmiennych wprowadzonych przez użytkownika
         save.setOnClickListener {
+
 
             var SpressureV: String = Spressure.getText().toString()
             var DpressureV: String = editText2.getText().toString()
@@ -86,15 +90,20 @@ class meassure : AppCompatActivity() {
                 //alert - ciśnienie powyżej 180/120 mm Hg
                 //pomiar zapisuje się, ale dodatkowo wyświetli się komunikat
                 if (SpressureV.toInt() > 179 || DpressureV.toInt() > 119) {
-                    Toast1.makeText(
+                    val toastAlert = Toast1.makeText(
                         applicationContext,
-                        "YOUR BLOOD PRESSURE IS TOO HIGH!!! CONTACT YOUR DOCTOR!!!",
-                        android.widget.Toast.LENGTH_LONG
-
-
-                    ).show()
+                        "YOUR BLOOD PRESSURE IS TOO HIGH!!! CONTACT HOSPITAL!!!",
+                        Toast1.LENGTH_LONG
+                    )
+                    val view: View = toastAlert.getView()
+                    view.setBackgroundColor(Color.parseColor("#FF0000"))
+                    toastAlert.show()
                 }
 
+                //po zatwierdzeniu reset w widoku
+                Spressure.setText("")
+                editText2.setText("")
+                medCheck.isChecked = false
 
             }
 

@@ -1,6 +1,6 @@
 package com.example.hypertensionmonitor
 
-import android.content.Intent
+
 import android.graphics.Paint
 import android.os.Build
 import android.os.Bundle
@@ -8,11 +8,10 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
-//import sun.text.normalizer.UTF16.append
 import java.io.*
-import java.util.ArrayList
 
 
 class WeekChart : AppCompatActivity() {
@@ -58,22 +57,7 @@ class WeekChart : AppCompatActivity() {
             sysRes = sysRes + splitRes[1].toDouble()//Wszystkie wyniki ciśnienia skurczowego
             diaRes = diaRes + splitRes[2].toDouble()//Wszystkie wyniki ciśnienia rozkuroczwego
         }
-        println(sysRes.joinToString(" "))
 
-        //dane do layoutu data do podsumowania
-//        var meanSysRes=sysRes.average()
-//        var meanDiaRes=diaRes.average()
-//        val intent = Intent(this, data::class.java)
-//        intent.putExtra("status", meanSysRes)
-//        intent.putExtra("status", meanDiaRes)
-
-        //tworzenie wykresu
-        var x: Double = 0.0
-
-        val graph: GraphView = findViewById(R.id.weekData)
-
-        series = LineGraphSeries<DataPoint>();//systolic
-        series2 = LineGraphSeries<DataPoint>();//diastolic
 
         //Pobór informacji o zakresie wykresu
         //Przeniesienie zmiennych z inf o statusie do wykresu
@@ -81,7 +65,7 @@ class WeekChart : AppCompatActivity() {
         var status = intent.getStringExtra("status")
         // w przypadku bezpośredniego przejścia do 'show data'
         if (status == null) status = statusD
-        println(status)
+
 
         //Zmiana zakresu
         var range = when (status) {
@@ -95,14 +79,19 @@ class WeekChart : AppCompatActivity() {
             range = sysRes.size - 1
             Toast.makeText(
                 applicationContext,
-                "Not enought data! You'll see all data graph instead.",
+                "Not enought data! You see all data graph instead.",
                 android.widget.Toast.LENGTH_LONG
             ).show()
         }
 
-        //println(range)
 
+        //tworzenie wykresu
+        val graph: GraphView = findViewById(R.id.weekData)
 
+        series = LineGraphSeries<DataPoint>();//systolic
+        series2 = LineGraphSeries<DataPoint>();//diastolic
+
+        var x: Double = 0.0
         for (i in 0..range) {
             x = i.toDouble()
             series.appendData(DataPoint(x, sysRes[i]), true, sysRes.size - 1)
@@ -116,6 +105,10 @@ class WeekChart : AppCompatActivity() {
         graph.getViewport().setMaxX(range.toDouble());
         graph.getViewport().setMinY(35.0);
         graph.getViewport().setMaxY(260.0);
+
+        val gridLabel: GridLabelRenderer = graph.getGridLabelRenderer()
+        gridLabel.horizontalAxisTitle = "Meassurments"
+        gridLabel.verticalAxisTitle = "Blood pressure [mmHg]"
 
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setXAxisBoundsManual(true);

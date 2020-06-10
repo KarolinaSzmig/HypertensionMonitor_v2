@@ -56,6 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="show"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.362"
@@ -80,7 +81,6 @@
             android:id="@+id/radio_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="all data"
             android:textSize="18sp" />
 
@@ -88,7 +88,6 @@
             android:id="@+id/radio_week"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="last week"
             android:textSize="18sp" />
 
@@ -96,7 +95,6 @@
             android:id="@+id/radio_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
             android:text="last month"
             android:textSize="18sp" />
 
@@ -219,9 +217,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="General"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.383" />
@@ -232,12 +231,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meds taken"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
-        app:layout_constraintStart_toEndOf="@+id/general"
-        app:layout_constraintTop_toBottomOf="@+id/summary"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383" />
 
     <Button
         android:id="@+id/medsNT"
@@ -245,12 +245,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Meds not taken"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.809"
-        app:layout_constraintStart_toEndOf="@+id/medsT"
-        app:layout_constraintTop_toBottomOf="@+id/summary"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383" />
 
 
     <!--    <paths xmlns:android="http://schemas.android.com/apk/res/android"-->

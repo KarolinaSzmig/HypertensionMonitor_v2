@@ -39,7 +39,6 @@ class data : AppCompatActivity() {
         }
 
 
-
         //zczytanie pliku
         val meassurment = dataReading()
 
@@ -59,73 +58,106 @@ class data : AppCompatActivity() {
             splitRes = meassurment[i].split(";")
             sysRes = sysRes + splitRes[1].toDouble()//Wszystkie wyniki ciśnienia skurczowego
             diaRes = diaRes + splitRes[2].toDouble()//Wszystkie wyniki ciśnienia rozkuroczwego
-            if (splitRes[3].toBoolean()==true){
-                sysMedTaken=sysMedTaken+splitRes[1].toDouble()
-                diaMedTaken=diaMedTaken+splitRes[2].toDouble()
-            }else{
-                sysMedNotTaken=sysMedNotTaken+splitRes[1].toDouble()
-                diaMedNotTaken=diaMedNotTaken+splitRes[2].toDouble()
+            if (splitRes[3].toBoolean() == true) {
+                sysMedTaken = sysMedTaken + splitRes[1].toDouble()
+                diaMedTaken = diaMedTaken + splitRes[2].toDouble()
+            } else {
+                sysMedNotTaken = sysMedNotTaken + splitRes[1].toDouble()
+                diaMedNotTaken = diaMedNotTaken + splitRes[2].toDouble()
             }
         }
 
         //podsumowanie
         //domyślnie - dane ze wszystkich pomiarów
         var meanSysG = sysRes.average().roundToInt().toString()
-        var meanDiaG=diaRes.average().roundToInt().toString()
+        var meanDiaG = diaRes.average().roundToInt().toString()
         mean.setText("$meanSysG / $meanDiaG")
-        var maxSysG=sysRes.max()?.toInt().toString()
-        var maxDiaG= diaRes.max()?.toInt().toString()
+        var maxSysG = sysRes.max()?.toInt().toString()
+        var maxDiaG = diaRes.max()?.toInt().toString()
         max.setText("$maxSysG / $maxDiaG")
-        var minSysG=sysRes.min()?.toInt().toString()
-        var minDiaG= diaRes.min()?.toInt().toString()
+        var minSysG = sysRes.min()?.toInt().toString()
+        var minDiaG = diaRes.min()?.toInt().toString()
         min.setText("$minSysG / $minDiaG")
 
         //podsumowanie dla wyników, kiedy leki zostały wzięte
-        var meanSysT=sysMedTaken.average().roundToInt().toString()
-        var meanDiaT=diaMedTaken.average().roundToInt().toString()
-        var maxSysT=sysMedTaken.max()?.toInt().toString()
-        var maxDiaT= diaMedTaken.max()?.toInt().toString()
-        var minSysT=sysMedTaken.min()?.toInt().toString()
-        var minDiaT= diaMedTaken.min()?.toInt().toString()
+        var meanSysT = sysMedTaken.average().roundToInt().toString()
+        var meanDiaT = diaMedTaken.average().roundToInt().toString()
+        var maxSysT = sysMedTaken.max()?.toInt().toString()
+        var maxDiaT = diaMedTaken.max()?.toInt().toString()
+        var minSysT = sysMedTaken.min()?.toInt().toString()
+        var minDiaT = diaMedTaken.min()?.toInt().toString()
 
         //podsumowanie dla wyników, kiedy leki nie zostały wzięte
-        var meanSysNT=sysMedNotTaken.average().roundToInt().toString()
-        var meanDiaNT=diaMedNotTaken.average().roundToInt().toString()
-        var maxSysNT=sysMedNotTaken.max()?.toInt().toString()
-        var maxDiaNT= diaMedNotTaken.max()?.toInt().toString()
-        var minSysNT=sysMedNotTaken.min()?.toInt().toString()
-        var minDiaNT= diaMedNotTaken.min()?.toInt().toString()
+        var meanSysNT = sysMedNotTaken.average().roundToInt().toString()
+        var meanDiaNT = diaMedNotTaken.average().roundToInt().toString()
+        var maxSysNT = sysMedNotTaken.max()?.toInt().toString()
+        var maxDiaNT = diaMedNotTaken.max()?.toInt().toString()
+        var minSysNT = sysMedNotTaken.min()?.toInt().toString()
+        var minDiaNT = diaMedNotTaken.min()?.toInt().toString()
 
         //Przyciski zmieniające grupę wziętą do podsumowania (wszystko/kiedy leki zostały wzięte/kiedy leki nie zostały wzięte)
         general.setOnClickListener {
-            mean.setText("$meanSysG / $meanDiaG")
-            mean.setTextColor(Color.parseColor("#000000"))
-            max.setText("$maxSysG / $maxDiaG")
-            max.setTextColor(Color.parseColor("#000000"))
-            min.setText("$minSysG / $minDiaG")
-            min.setTextColor(Color.parseColor("#000000"))
+            if (sysRes.size > 0) {
+                mean.setText("$meanSysG / $meanDiaG")
+                mean.setTextColor(Color.parseColor("#000000"))
+                max.setText("$maxSysG / $maxDiaG")
+                max.setTextColor(Color.parseColor("#000000"))
+                min.setText("$minSysG / $minDiaG")
+                min.setTextColor(Color.parseColor("#000000"))
+            } else {
+                mean.setText("000")
+                max.setText("000")
+                min.setText("000")
+                Toast.makeText(
+                    applicationContext,
+                    "Not enought data",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         medsT.setOnClickListener {
-            mean.setText("$meanSysT / $meanDiaT")
-            mean.setTextColor(Color.parseColor("#0aad3f"))
-            max.setText("$maxSysT / $maxDiaT")
-            max.setTextColor(Color.parseColor("#0aad3f"))
-            min.setText("$minSysT / $minDiaT")
-            min.setTextColor(Color.parseColor("#0aad3f"))
+            if (sysMedTaken.size > 0) {
+                mean.setText("$meanSysT / $meanDiaT")
+                mean.setTextColor(Color.parseColor("#0aad3f"))
+                max.setText("$maxSysT / $maxDiaT")
+                max.setTextColor(Color.parseColor("#0aad3f"))
+                min.setText("$minSysT / $minDiaT")
+                min.setTextColor(Color.parseColor("#0aad3f"))
+            } else {
+                mean.setText("000")
+                max.setText("000")
+                min.setText("000")
+                Toast.makeText(
+                    applicationContext,
+                    "no registration of taking medicines",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         medsNT.setOnClickListener {
-            mean.setText("$meanSysNT / $meanDiaNT")
-            mean.setTextColor(Color.parseColor("#ad0a1d"))
-            max.setText("$maxSysNT / $maxDiaNT")
-            max.setTextColor(Color.parseColor("#ad0a1d"))
-            min.setText("$minSysNT / $minDiaNT")
-            min.setTextColor(Color.parseColor("#ad0a1d"))
+            if (sysMedNotTaken.size > 0) {
+                mean.setText("$meanSysNT / $meanDiaNT")
+                mean.setTextColor(Color.parseColor("#ad0a1d"))
+                max.setText("$maxSysNT / $maxDiaNT")
+                max.setTextColor(Color.parseColor("#ad0a1d"))
+                min.setText("$minSysNT / $minDiaNT")
+                min.setTextColor(Color.parseColor("#ad0a1d"))
+            } else {
+                mean.setText("000")
+                max.setText("000")
+                min.setText("000")
+                Toast.makeText(
+                    applicationContext,
+                    "No registration witchout medicines taking",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
 
-        //Zakres wykresu - sprawdzenie, który radio button został wybrany; domyślnie 'all'
+        // Zakres wykresu - sprawdzenie, który radio button został wybrany; domyślnie 'all'
         fun getSelectedRadioButtonTxt(id: Int): CharSequence? {
             val group = findViewById<RadioGroup>(id)
             val selected = findViewById<RadioButton>(group.checkedRadioButtonId)
@@ -138,30 +170,34 @@ class data : AppCompatActivity() {
 
             //Zabezpieczenie jeśli plik jest zbyt krótki żeby wyświetlić wykres
             if (sysRes.size < 3) {
+
                 Toast.makeText(
                     applicationContext,
                     "Not enought data to make a graph! Add more meassurments!",
                     android.widget.Toast.LENGTH_SHORT
                 ).show()
-            } else {
-                var status = getSelectedRadioButtonTxt(R.id.graphRange)
 
+            } else {
+                var status = "all data"
+                status = getSelectedRadioButtonTxt(R.id.graphRange).toString()
                 //wysłanie informacji o statusie do layoutu z wykresem
                 val intent = Intent(this, WeekChart::class.java)
                 intent.putExtra("status", status)
                 startActivity(intent)
+
             }
+
         }
 
         //udostępnianie pliku
         val results = dataReading().toString()
         getFile.setOnClickListener {
 
-            val intent =Intent()
-            intent.action=Intent.ACTION_SEND
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
             intent.putExtra(Intent.EXTRA_TEXT, results)
             intent.type = "text/csv"
-            startActivity(Intent.createChooser(intent,"Share:"))
+            startActivity(Intent.createChooser(intent, "Share:"))
 
 
         }
