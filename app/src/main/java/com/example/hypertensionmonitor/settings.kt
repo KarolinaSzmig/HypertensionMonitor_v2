@@ -9,26 +9,20 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Switch
-import android.widget.TimePicker
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import kotlinx.android.synthetic.main.activity_settings.*
+import java.util.*
 
 
 class settings : AppCompatActivity() {
 
     //powiadomienia
     lateinit var notificationManager: NotificationManager
-    lateinit var notificationChannel: NotificationChannel //użytkownik moze zdezaktywowac
-    lateinit var builder: Notification.Builder
-    private val channelId = "com.example.vicky.notificationexample"
-    private val description = "Test notification"
-
+    //alarm manager
     lateinit var context: Context
     lateinit var alarmManager: AlarmManager
 
@@ -38,38 +32,55 @@ class settings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-
+        //alarm manager
         context = this
         alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
-        val przykladowagodzina = 12
 
-
-        val MNTpicker: TimePicker = findViewById(R.id.MNTpicker)
-
+        //przełącznik - gdy 'ON', pojawia się TmiePicker i przycisk 'set'
         val switchMorning: Switch = findViewById(R.id.switchMorning)
         switchMorning.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 switchMorning.setText("ON")
-                MNTpicker.visibility= View.VISIBLE
-
-                setMN.visibility=View.VISIBLE
-
+                MNTpicker.visibility = View.VISIBLE
+                setMN.visibility = View.VISIBLE
 
 
             } else {
                 switchMorning.setText("OFF")
-                MNTpicker.visibility= View.INVISIBLE
-                setMN.visibility=View.INVISIBLE
+                MNTpicker.visibility = View.INVISIBLE
+                setMN.visibility = View.INVISIBLE
             }
         }
 
+        //notification manager - do powiadomień w pasku u góry
         notificationManager =
-            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager//do powiadomien w pasku
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-
+        //set - ustawianie przypomnień pomiru ciśnienia
         setMN.setOnClickListener {
 
+            //określenie godziny powiadomień
+            var MNhour = MNTpicker.hour.toInt() * 60 * 60 * 1000//ms
+            var MNminute = MNTpicker.minute.toInt() * 60 * 1000
+            var sumMesNotAddTime =
+                MNhour + MNminute//suma milisekund od północy do momentu przypomnienia
+            //Sprawdzenie ile trzeba dodać do godziny aktualnej
+            //teraz
+            val c = Calendar.getInstance()
+            val cHour = c.get(Calendar.HOUR_OF_DAY)
+            val cMinute = c.get(Calendar.MINUTE)
+            var nowMili =
+                cHour * 60 * 60 * 1000 + cMinute * 60 * 1000//Aktualny czas dziś w milisekundach
+            var timeToAdd = 0// Czas do dodania od chwili ustawiania powiadomienia
+            if (sumMesNotAddTime > nowMili) {
+                timeToAdd = sumMesNotAddTime - nowMili
+            } else {
+                timeToAdd = (24 * 60 * 60 * 1000 - nowMili) + sumMesNotAddTime
+            }
+
+
+            //Powiadomienie na pasku u góry
             val notifyIntent = Intent(this, Receiver::class.java)
             var pendingIntent = PendingIntent.getBroadcast(
                 context,
@@ -77,53 +88,25 @@ class settings : AppCompatActivity() {
                 notifyIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-            val second = przykladowagodzina * 1000//toInt//*1000 bo milisekundy CZAAAAAS
 
-
+            //Ustawienie godziny oraz interwału przypomnień
             val alarmManager =
                 context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             alarmManager.setRepeating(
-                AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + second,
-                1000 * 60 * 60 * 24.toLong(), pendingIntent
+                AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + timeToAdd,
+                1000 * 60 * 60 * 24.toLong(), pendingIntent//powtarzanie powiadomienia co 24h
             )
 
-//            val MNhour = MNTpicker.hour.toString()
-//            val MNminute = MNTpicker.minute.toString()
-//
-
-
 
         }
-
-
-        val MedTpicker: TimePicker = findViewById(R.id.MedTpicker)
-        val switchMedicine: Switch = findViewById(R.id.switchMedicine)
-
-        switchMedicine.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                MedTpicker.visibility=View.VISIBLE
-                switchMedicine.setText("ON")
-            } else {
-                switchMedicine.setText("OFF")
-                MedTpicker.visibility=View.INVISIBLE
-            }
-        }
-
-
-
-
-
 
 
     }
 
-
-
-
 }
 
-//klasa służąca do wyświetlania powiadomień o zadanym czasie - użyta w 'settings'
-class Receiver : BroadcastReceiver() {
+//klasa służąca do wyświetlania powiadomień o pomiarach zadanym czasie
+class Receiver() : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -133,12 +116,7 @@ class Receiver : BroadcastReceiver() {
         } else {
             context!!.startService(intent1)
         }
-        Log.d("settings", "Receiver: Twoje powiadomionkoooooooo  :>>>>>>")
-        Toast.makeText(
-            context,
-            "WIIIIIIIIIIIII",
-            android.widget.Toast.LENGTH_SHORT
-        ).show()
+
 
     }
 
@@ -160,12 +138,12 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startMyOwnForeground() {
-        val NOTIFICATION_CHANNEL_ID = "com.example.simpleapp"
+        val NOTIFICATION_CHANNEL_ID = "com.example.hypertensionmonitor"
         val channelName = "My Background Service"
         val chan = NotificationChannel(
             NOTIFICATION_CHANNEL_ID,
             channelName,
-            NotificationManager.IMPORTANCE_NONE
+            NotificationManager.IMPORTANCE_HIGH
         )
         chan.lightColor = Color.BLUE
         chan.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
@@ -183,6 +161,7 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
         startForeground(2, notification)
     }
 
+    //budowanie powiadomień w pasku
     override fun onHandleIntent(intent: Intent?) {
         var builder = Notification.Builder(this)
         val notificationManager =
@@ -209,7 +188,6 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
                         R.mipmap.ic_launcher
                     )
                 )
-            //.setContentIntent(pendingIntent)
         } else {
 
             builder = Notification.Builder(this)
@@ -222,7 +200,6 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
                         R.mipmap.ic_launcher
                     )
                 )
-            //.setContentIntent(pendingIntent)
         }
         builder.setAutoCancel(true)
         builder.setContentIntent(pendingIntent)
@@ -230,7 +207,11 @@ class MyNewIntentService : IntentService("MyNewIntentService") {
 
     }
 
-    companion object {
-        private const val NOTIFICATION_ID = 3
-    }
 }
+
+
+
+
+
+
+
